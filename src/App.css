@@ -1,0 +1,19 @@
+.board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  margin: 0;
+  padding: 0;
+  width: 400px;
+  height: 400px;
+}
+
+.box {
+  border: 1px solid black;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 12.5px;
+  height: 50px;
+  width: 50px;
+  font-family: Montserrat;
+}
