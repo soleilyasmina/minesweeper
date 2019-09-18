@@ -4,7 +4,7 @@ const Box = ({ box, revealNeighbors }) => (
   <div 
     onClick={() => revealNeighbors(box.y, box.x)}
     className="box">
-    {box.isRevealed ? (box.isBomb ? 'B' : box.neighboringBombs ? box.neighboringBombs : '') : 'X'}
+    {box.isRevealed ? (box.isBomb ? '💣' : box.neighboringBombs ? box.neighboringBombs : '') : 'X'}
   </div>
 )
 

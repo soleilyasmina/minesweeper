@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { generateBoard, getNeighborsToReveal } from '../services/board';
 import Box from './Box';
 
 const Grid = (props) => {
-  const [board, setBoard] = useState(generateBoard(10));
+  // eslint-disable-next-line
+  const [size, setSize] = useState(10);
+  const [board, setBoard] = useState(generateBoard(size));
 
   const revealBox = (y, x) => {
     const newBoard = board;
@@ -37,7 +39,7 @@ const Grid = (props) => {
 
   return (
     <>
-      <div className="board-10">
+      <div className={`board-${size}`}>
         { board.flat(1).map((box) => (
           <Box
             box={box}
