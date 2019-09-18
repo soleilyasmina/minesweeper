@@ -32,6 +32,10 @@ const getNeighbors = (y, x, size) => {
   return neighbors;
 }
 
+export const getNeighborsToReveal = (y, x, size) => {
+  return getNeighbors(y, x, size).filter((box) => box.y === y || box.x === x);
+}
+
 const declareNeighboringBombs = (board) => {
   const bombs = board.flat(1).filter((box) => box.isBomb);
   bombs.forEach((bomb) => {

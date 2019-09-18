@@ -1,4 +1,4 @@
-.board {
+.board-8 {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
@@ -6,6 +6,15 @@
   padding: 0;
   width: 400px;
   height: 400px;
+}
+.board-10 {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  margin: 0;
+  padding: 0;
+  width: 500px;
+  height: 500px;
 }
 
 .box {
