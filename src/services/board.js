@@ -17,7 +17,7 @@ const isCoordinate = (y, x, size) => {
   return y >= 0 && x >= 0 && y < size && x < size;
 }
 
-const getNeighbors = (y, x, size) => {
+export const getNeighbors = (y, x, size) => {
   const neighbors = []; 
   for (let j = -1; j <= 1; j++) {
     for (let i = -1; i <= 1; i++) {
@@ -30,10 +30,6 @@ const getNeighbors = (y, x, size) => {
     }
   }
   return neighbors;
-}
-
-export const getNeighborsToReveal = (y, x, size) => {
-  return getNeighbors(y, x, size).filter((box) => box.y === y || box.x === x);
 }
 
 const declareNeighboringBombs = (board) => {
