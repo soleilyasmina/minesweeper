@@ -7,17 +7,15 @@ const Grid = (props) => {
   const [size, setSize] = useState(10);
   const [board, setBoard] = useState(generateBoard(size));
   const [win, setWin] = useState(false);
+  const [lose, setLose] = useState(false);
 
   useEffect(() => {
     const { bombs, flagged, revealed } = board.flat(1).reduce((acc, curr) => {
-      if (curr.isRevealed) acc.revealed += 1;
       if (curr.isBomb) acc.bombs += 1;
       if (curr.isFlagged) acc.flagged += 1;
+      if (curr.isRevealed) acc.revealed += 1;
       return acc;
-    }, { revealed: 0, bombs: 0, flagged: 0 });
-
-    console.log(revealed);
-
+    }, { bombs: 0, flagged: 0, revealed: 0 });
     if (size**2 - bombs === revealed + flagged) setWin(true);
   }, [board]);
 
@@ -38,13 +36,11 @@ const Grid = (props) => {
 
   const revealNeighbors = (currentY, currentX) => {
     if (board[currentY][currentX].isBomb) {
-      setBoard((prevBoard) => prevBoard.map((row) => row.map((box) => {
-        return box.isBomb ? {
+      setBoard((prevBoard) => prevBoard.map((row) => row.map((box) => ({
           ...box,
           isRevealed: true
-        } :
-          box;
-      })));
+    }))));
+      setLose(true);
       return;
     }
     revealBox(currentY, currentX);
@@ -59,6 +55,16 @@ const Grid = (props) => {
     }
   }
 
+  const message = () => {
+    if (win) {
+      return "You win!";
+    } else if (lose) {
+      return "You lose!";
+    } else {
+      return `Keep going, there are ${size} bombs left.`;
+    }
+  }
+
   return (
     <>
       <div className={`board-${size}`}>
@@ -70,7 +76,7 @@ const Grid = (props) => {
           />
         )) }
       </div>
-      <h4>{win ? 'You win!' : 'Keep going!'}</h4>
+      <h4>{message()}</h4>
     </>
   )
 }
