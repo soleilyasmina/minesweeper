@@ -49,6 +49,7 @@ export const generateBoard = (size) => {
     const row = [];
     for (let x = 0; x < size; x++) {
       row.push({
+        isFlagged: false,
         isBomb: false,
         isRevealed: false,
         neighboringBombs: 0,

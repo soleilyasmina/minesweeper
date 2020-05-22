@@ -9,20 +9,30 @@ const Grid = (props) => {
   const [win, setWin] = useState(false);
 
   useEffect(() => {
-    const { revealed, bombs } = board.flat(1).reduce((acc, curr) => {
+    const { bombs, flagged, revealed } = board.flat(1).reduce((acc, curr) => {
       if (curr.isRevealed) acc.revealed += 1;
       if (curr.isBomb) acc.bombs += 1;
+      if (curr.isFlagged) acc.flagged += 1;
       return acc;
-    }, { revealed: 0, bombs: 0 });
+    }, { revealed: 0, bombs: 0, flagged: 0 });
 
     console.log(revealed);
 
-    if (size**2 - bombs === revealed) setWin(true);
+    if (size**2 - bombs === revealed + flagged) setWin(true);
   }, [board]);
 
   const revealBox = (y, x) => {
     const newBoard = board;
+    if (newBoard[y][x].isRevealed || newBoard[y][x].isFlagged) return;
     newBoard[y][x].isRevealed = true;
+    setBoard([...newBoard]);
+  }
+
+  const flagBox = (e, y, x) => {
+    e.preventDefault();
+    const newBoard = board;
+    if (newBoard[y][x].isRevealed) return;
+    newBoard[y][x].isFlagged = !newBoard[y][x].isFlagged;
     setBoard([...newBoard]);
   }
 
@@ -55,6 +65,7 @@ const Grid = (props) => {
         { board.flat(1).map((box) => (
           <Box
             box={box}
+            flagBox={flagBox}
             revealNeighbors={revealNeighbors}
           />
         )) }
