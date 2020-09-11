@@ -17,10 +17,11 @@ const Box = ({ box: { isBomb, isFlagged, isRevealed, neighboringBombs, x, y }, f
     <div
       onClick={() => revealNeighbors(y, x)}
       onContextMenu={(e) => flagBox(e, y, x)}
-      className="box">
+      className="box"
+    >
       {emoji}
     </div>
-  )
-}
+  );
+};
 
 export default Box;
