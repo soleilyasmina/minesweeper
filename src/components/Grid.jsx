@@ -17,7 +17,7 @@ const Grid = () => {
       return acc;
     }, { bombs: 0, flagged: 0, revealed: 0 });
     if (size ** 2 - bombs === revealed + flagged) setWin(true);
-  }, [board]);
+  }, [board, size]);
 
   const revealBox = (y, x) => {
     const newBoard = board;
